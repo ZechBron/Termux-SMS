@@ -12,7 +12,7 @@ Send text message in termux.
 
 > chmod +x setup.sh
 
-`It is recommended to run setup,sh first`
+`It is recommended to run setup.sh first`
 
 __Two Ways To Run Setup.sh__
 
