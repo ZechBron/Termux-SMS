@@ -1,6 +1,7 @@
 #!/bin/bash
 pkg install termux-api -y
 pkg install termux-tools -y
+pkg install grep -y
 
 chmod +x termuxSMS.sh
 
