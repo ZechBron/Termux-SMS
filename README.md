@@ -10,7 +10,7 @@ Send text message in termux.
 
 > cd Termux-SMS
 
-> chmod +x setup,sh
+> chmod +x setup.sh
 
 `It is recommended to run setup,sh first`
 
@@ -31,4 +31,4 @@ __Two Ways Run the Script:__
 
 Or
 
-> ,/TermuxSMS.sh
+> ./TermuxSMS.sh
