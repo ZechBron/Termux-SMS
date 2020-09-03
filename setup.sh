@@ -3,7 +3,7 @@ pkg install termux-api -y
 pkg install termux-tools -y
 pkg install grep -y
 
-chmod +x termuxSMS.sh
+chmod +x TermuxSMS.sh
 
 pm list packages -3 > log
 grep "package:com.termux.api" log
