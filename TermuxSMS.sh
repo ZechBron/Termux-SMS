@@ -15,27 +15,62 @@ zCh=$(grep "package:com.termux.api" log)
 ChB="package:com.termux.api"
 echo -e "\n"
 
+echo -e "\e[32mWhat do you want?\e[0m"
+echo -e " A. \e[34mSend SMS\e[0m"
+echo -e " B. \e[34mSMS Bomb / SMS Spam\e[0m"
+read option
+
+check() {
+if [ $? = 0 ]; then
+echo -e "\e[32mMessage successfully sent\e[0m"
+elif [ $? = 1 ]; then
+echo -e "\e[31mMessage sent failed. You might want to try again?\e[0m"
+else
+echo "Unknown error"
+fi
+}
+
+
 if [ "$zCh" = "$ChB" ]; then
    rm -f log
-   while [ -z "$num" ]
-   do
-      echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter number(s seperated by comma e.g 09123456789,09987654321,09123498765)\e[0m\e[34m"
-      read num
-   done
-   while [ -z "$msg" ]
-   do
-      echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter Message:\e[0m\e[34m"
-      read msg
-   done
 
-   termux-sms-send -n "$num" "$msg"
+   if [ "$option" == "A" ] || [ "$option" == "a" ]; then
+      while [ -z "$num" ]
+      do
+         echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter number(s seperated by comma e.g 09123456789,09987654321,09123498765)\e[0m\e[34m"
+         read num
+      done
+      while [ -z "$msg" ]
+      do
+         echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter Message:\e[0m\e[34m"
+         read msg
+      done
 
-   if [ $? = 0 ]; then
-      echo -e "\e[32mSent succesfull.\e[0m"
-   elif [ $? = 1 ]; then
-      echo -e "\e[91mSending failed. You might want to try again.\e[0m"
+      termux-sms-send -n "$num" "$msg"
+
+   elif [ "$option" == "B" ] || [ "$option" == "b" ]; then
+      echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mHow many sms you want to send? "
+      read loop
+      i=0
+      while [ $i -lt $loop ]
+      do
+         while [ -z "$num" ]
+         do
+            echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter number(s seperated by comma e.g 09123456789,09987654321,09123498765)\e[0m\e[34m"
+            read num
+         done
+         while [ -z "$msg" ]
+         do
+            echo -e "\e[31m[\e[0m\e[32mZ\e[0m\e[31m]\e[0m \e[32mEnter Message:\e[0m\e[34m"
+            read msg
+         done
+
+         termux-sms-send -n "$num" "$msg"
+         i=$[$i+1]
+         echo -e "\e[32m$i message sent\e[0m"
+      done
    else
-      echo "Unknown error."
+      echo -e "\e[31mWrong input. Please enter valid choice\e[0m"
    fi
 
 elif [ "$zCh" != "$ChB" ]; then
